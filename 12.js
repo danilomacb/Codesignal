@@ -1,32 +1,31 @@
 function sortByHeight(a) {
-    let menor, qtd = 0, array = [];
+    let array = [], l = 0;
 
-    for(j = 0; j < a.length; j++) {
-        if(a[j] !== -1) {
-            qtd++;
+    for(i = 0; i < a.length; i++) {
+        if(a[i] !== -1) {
+            array.push(a[i]);
+            a[i] = 0;
         }
     }
 
-    while(qtd > 0) {
-        for(i = 0; i < a.length; i++) {
-            if(a[i] !== -1) {
-                if(menor == null) {
-                    menor = a[i]
-                }
-                else if(menor > a[i]) {
-                    menor = a[i];
-                }
-            }
+    for(j = 0; j < array.length - 1; j++) {
+        if(array[j] > array[j+1]) {
+            let temp = array[j];
+            array[j] = array[j+1];
+            array[j+1] = temp;
+            j = -1;
         }
-
-        qtd--;
     }
 
-    return qtd;
+    for(k = 0; k < a.length; k++) {
+        if(a[k] === 0) {
+            a[k] = array[l];
+            l++;
+        }
+    }
+
+    return a;
 }
 
-let a = [-1, 150, 190, 170, -1, -1, 160, 180];
-// a.splice(8, 0, a[1]);
-// a.splice(1, 1);
-// console.log(a);
+let a = [23, 54, -1, 43, 1, -1, -1, 77, -1, -1, -1, 3];
 console.log(sortByHeight(a));
